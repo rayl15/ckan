@@ -1,0 +1,6 @@
+[submodule "3rdparty/datacats"]
+	path = 3rdparty/datacats
+	url = https://github.com/datacats/datacats
+[submodule "3rdparty/ckan"]
+	path = 3rdparty/ckan
+	url = https://github.com/ckan/ckan

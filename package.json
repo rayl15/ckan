@@ -1,0 +1,7 @@
+{
+  "name": "cloud-helper-streamlined",
+  "version": "0.0.1",
+  "dependencies": {
+    "cloudformation-preprocessor": "9.x.x"
+  }
+}
