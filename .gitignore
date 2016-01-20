@@ -4,3 +4,6 @@ id_rsa.pub
 *.pem
 *.pub
 keys.db
+keys/
+.aws/
+node_modules/
