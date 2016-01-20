@@ -18,6 +18,9 @@ ssh-keygen:
 
 install:
 	@npm install --save
+	@curl -L -s https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest > ./node_modules/.bin/ecs-cli
+	@curl -L -s https://github.com/docker/compose/releases/download/1.6.0-rc1/docker-compose-Linux-x86_64 > ./node_modules/.bin/docker-compose
+	@chmod +x ./node_modules/.bin/*
 
 cloud-config:
 	@cat cloud-config.template.yml keys/id_rsa.pub.snippet > \
