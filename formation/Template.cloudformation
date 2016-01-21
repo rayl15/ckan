@@ -4,36 +4,36 @@
   "Mappings": {
     "RegionMap": {
 
-    "eu-central-1": {
-      "AMI": "ami-1d5b4271"
-    },
-    "ap-northeast-1": {
-      "AMI": "ami-e2635f8c"
-    },
-    "us-gov-west-1": {
-      "AMI": "ami-5105b830"
-    },
-    "sa-east-1": {
-      "AMI": "ami-bda829d1"
-    },
-    "ap-southeast-2": {
-      "AMI": "ami-ca0520a9"
-    },
-    "ap-southeast-1": {
-      "AMI": "ami-29b77b4a"
-    },
-    "us-east-1": {
-      "AMI": "ami-0662476c"
-    },
-    "us-west-2": {
-      "AMI": "ami-ece2f88d"
-    },
-    "us-west-1": {
-      "AMI": "ami-67225607"
-    },
-    "eu-west-1": {
-      "AMI": "ami-fc6bc08f"
-    }
+      "eu-central-1": {
+        "AMI": "ami-bfc8d1d3"
+      },
+      "ap-northeast-1": {
+        "AMI": "ami-fc714f92"
+      },
+      "us-gov-west-1": {
+        "AMI": "ami-56fe4237"
+      },
+      "sa-east-1": {
+        "AMI": "ami-6620a10a"
+      },
+      "ap-southeast-2": {
+        "AMI": "ami-0da2876e"
+      },
+      "ap-southeast-1": {
+        "AMI": "ami-f94d819a"
+      },
+      "us-east-1": {
+        "AMI": "ami-990d2bf3"
+      },
+      "us-west-2": {
+        "AMI": "ami-1446a374"
+      },
+      "us-west-1": {
+        "AMI": "ami-aa95e1ca"
+      },
+      "eu-west-1": {
+        "AMI": "ami-6ce85d1f"
+      }
 
     },
     "VpcCidrs": {
@@ -597,54 +597,54 @@
                   "Ref": "SourceCidr"
                 }
               },
-          {
-            "IpProtocol": "tcp",
-            "FromPort": "80",
-            "ToPort": "80",
-            "CidrIp": "0.0.0.0/0"
-          },
-          {
-            "IpProtocol": "tcp",
-            "FromPort": "3000",
-            "ToPort": "3000",
-            "CidrIp": "0.0.0.0/0"
-          },
-          {
-            "IpProtocol": "tcp",
-            "FromPort": "8080",
-            "ToPort": "8080",
-            "CidrIp": "0.0.0.0/0"
-          },
-          {
-            "IpProtocol": "tcp",
-            "FromPort": "443",
-            "ToPort": "443",
-            "CidrIp": "0.0.0.0/0"
-          },
-          {
-            "IpProtocol": "tcp",
-            "FromPort": "4001",
-            "ToPort": "4001",
-            "CidrIp": "0.0.0.0/0"
-          },
-          {
-            "IpProtocol": "tcp",
-            "FromPort": "7001",
-            "ToPort": "7001",
-            "CidrIp": "0.0.0.0/0"
-          },
-          {
-            "IpProtocol": "tcp",
-            "FromPort": "22",
-            "ToPort": "22",
-            "CidrIp": "0.0.0.0/0"
-          },
-          {
-            "IpProtocol": "tcp",
-            "FromPort": "2222",
-            "ToPort": "2222",
-            "CidrIp": "0.0.0.0/0"
-          }
+              {
+                "IpProtocol": "tcp",
+                "FromPort": "80",
+                "ToPort": "80",
+                "CidrIp": "0.0.0.0/0"
+              },
+              {
+                "IpProtocol": "tcp",
+                "FromPort": "3000",
+                "ToPort": "3000",
+                "CidrIp": "0.0.0.0/0"
+              },
+              {
+                "IpProtocol": "tcp",
+                "FromPort": "8080",
+                "ToPort": "8080",
+                "CidrIp": "0.0.0.0/0"
+              },
+              {
+                "IpProtocol": "tcp",
+                "FromPort": "443",
+                "ToPort": "443",
+                "CidrIp": "0.0.0.0/0"
+              },
+              {
+                "IpProtocol": "tcp",
+                "FromPort": "4001",
+                "ToPort": "4001",
+                "CidrIp": "0.0.0.0/0"
+              },
+              {
+                "IpProtocol": "tcp",
+                "FromPort": "7001",
+                "ToPort": "7001",
+                "CidrIp": "0.0.0.0/0"
+              },
+              {
+                "IpProtocol": "tcp",
+                "FromPort": "22",
+                "ToPort": "22",
+                "CidrIp": "0.0.0.0/0"
+              },
+              {
+                "IpProtocol": "tcp",
+                "FromPort": "2222",
+                "ToPort": "2222",
+                "CidrIp": "0.0.0.0/0"
+              }
             ]
           ]
         }
@@ -847,7 +847,7 @@
           ]
         },
         "LaunchConfigurationName": {
-              "Ref": "EcsInstanceLcWithoutKeyPair"
+          "Ref": "EcsInstanceLcWithoutKeyPair"
         },
         "MinSize": "1",
         "MaxSize": {
