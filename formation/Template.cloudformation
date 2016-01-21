@@ -490,56 +490,14 @@
           },
           {
             "IpProtocol": "tcp",
-            "FromPort": "81",
-            "ToPort": "81",
-            "CidrIp": "0.0.0.0/0"
-          },
-          {
-            "IpProtocol": "tcp",
-            "FromPort": "3000",
-            "ToPort": "3000",
-            "CidrIp": "0.0.0.0/0"
-          },
-          {
-            "IpProtocol": "tcp",
-            "FromPort": "8080",
-            "ToPort": "8080",
-            "CidrIp": "0.0.0.0/0"
-          },
-          {
-            "IpProtocol": "tcp",
-            "FromPort": "8888",
-            "ToPort": "8888",
-            "CidrIp": "0.0.0.0/0"
-          },
-          {
-            "IpProtocol": "tcp",
             "FromPort": "443",
             "ToPort": "443",
             "CidrIp": "0.0.0.0/0"
           },
           {
             "IpProtocol": "tcp",
-            "FromPort": "4001",
-            "ToPort": "4001",
-            "CidrIp": "0.0.0.0/0"
-          },
-          {
-            "IpProtocol": "tcp",
-            "FromPort": "7001",
-            "ToPort": "7001",
-            "CidrIp": "0.0.0.0/0"
-          },
-          {
-            "IpProtocol": "tcp",
             "FromPort": "22",
             "ToPort": "22",
-            "CidrIp": "0.0.0.0/0"
-          },
-          {
-            "IpProtocol": "tcp",
-            "FromPort": "2222",
-            "ToPort": "2222",
             "CidrIp": "0.0.0.0/0"
           }
         ]
@@ -606,44 +564,14 @@
               },
               {
                 "IpProtocol": "tcp",
-                "FromPort": "3000",
-                "ToPort": "3000",
-                "CidrIp": "0.0.0.0/0"
-              },
-              {
-                "IpProtocol": "tcp",
-                "FromPort": "8080",
-                "ToPort": "8080",
-                "CidrIp": "0.0.0.0/0"
-              },
-              {
-                "IpProtocol": "tcp",
                 "FromPort": "443",
                 "ToPort": "443",
                 "CidrIp": "0.0.0.0/0"
               },
               {
                 "IpProtocol": "tcp",
-                "FromPort": "4001",
-                "ToPort": "4001",
-                "CidrIp": "0.0.0.0/0"
-              },
-              {
-                "IpProtocol": "tcp",
-                "FromPort": "7001",
-                "ToPort": "7001",
-                "CidrIp": "0.0.0.0/0"
-              },
-              {
-                "IpProtocol": "tcp",
                 "FromPort": "22",
                 "ToPort": "22",
-                "CidrIp": "0.0.0.0/0"
-              },
-              {
-                "IpProtocol": "tcp",
-                "FromPort": "2222",
-                "ToPort": "2222",
                 "CidrIp": "0.0.0.0/0"
               }
             ]
