@@ -31,6 +31,10 @@ ssh-core:
 
 configure-aws:
 	@aws configure
+	@read -r -p "ECS region: " region && ecs-cli configure -p default -c default --region $$region
+
+ps:
+	@ecs-cli ps
 
 list-tasks:
 	@aws ecs list-tasks --cluster default
