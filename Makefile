@@ -78,19 +78,10 @@ list:
 		--query 'Reservations[].Instances[].[Tags[?Key==`aws:cloudformation:stack-name`] | [0].Value, InstanceId,PublicIpAddress,InstanceType,Placement.AvailabilityZone,State.Name]' \
 		--output table
 
-delete-aws:
-	@aws cloudformation delete-stack --stack-name $(RUN_ARGS)
-
-delete-ecs:
-	@aws cloudformation delete-stack --stack-name $(RUN_ARGS)
-
 create: cloud-config
 	@cp formation/Template.cloudformation Result.cloudformation
 	@cfnpp
 	@aws cloudformation create-stack --stack-name core${random} --template-body file://.//Result.cloudformation
-
-create-ecs-cluster:
-	@aws ecs create-cluster --cluster-name default
 
 locations-aws:
 	@aws ec2 describe-regions --output table
