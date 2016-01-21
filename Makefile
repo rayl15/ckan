@@ -36,6 +36,12 @@ configure-aws:
 ps:
 	@ecs-cli ps
 
+ecs-compose-up:
+	@ecs-cli compose -f compose/docker-compose.yml up
+
+ecs-compose-stop:
+	@ecs-cli compose -f compose/docker-compose.yml stop
+
 list-tasks:
 	@aws ecs list-tasks --cluster default
 
