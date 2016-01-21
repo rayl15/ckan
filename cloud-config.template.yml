@@ -1,12 +1,5 @@
 #cloud-config
 
-write_files:
-  - path: /etc/environment
-    permissions: 0644
-    owner: core
-    content: |
-      DOCKER_OPTS=-H=172.17.42.1:4243
-
 coreos:
   update:
     reboot-strategy: off
@@ -32,31 +25,6 @@ coreos:
         Type=idle
         RestartSec=10s
         Restart=on-failure
-    - name: docker.service
-      drop-ins:
-        - name: 50-docker-opts.conf
-          content: |
-            [Service]
-            EnvironmentFile=/etc/environment
-    - name: foo.service
-      content: |
-        [Unit]
-        Description=Inner
-        After=docker.service
-        Requires=docker.service
-
-        [Service]
-        ExecStartPre=/usr/bin/docker run --rm -v /opt/bin:/opt/bin ibuildthecloud/systemd-docker
-        ExecStart=/opt/bin/systemd-docker run --rm --name %n --net=host -v /home/core/.ssh/authorized_keys:/root/.ssh/authorized_keys_core:ro axetwe/inner sh -c "cp /root/.ssh/authorized_keys_core /root/.ssh/authorized_keys; /usr/sbin/sshd -D"
-        Restart=always
-        RestartSec=10s
-        Type=notify
-        NotifyAccess=all
-        TimeoutStartSec=120
-        TimeoutStopSec=15
-
-        [Install]
-        WantedBy=multi-user.target
 
 ssh_authorized_keys:
 
