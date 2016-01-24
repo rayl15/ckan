@@ -1,8 +1,8 @@
 In a nutshell:
 
-1. make configure-aws
-2. make ssh-keygen
-3. make install
+1. make install
+2. make configure-aws
+3. make ssh-keygen
 4. make cluster
 5. make create
 6. sleep 120
