@@ -41,6 +41,7 @@ list-clusters:
 	@aws ecs list-clusters
 
 cluster:
+	@ecs-cli configure -c default
 	@aws ecs create-cluster --cluster-name default
 
 delete-cluster:
