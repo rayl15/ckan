@@ -9,7 +9,7 @@ In a nutshell:
 7. make ecs-compose-up
 8. make ps
 
-(requires make, aws-cli, nodejs, jq)
+(requires make, aws-cli, ecs-cli, nodejs, jq)
 
 `make cluster` creates an empty ECS cluster named 'default'.
 
