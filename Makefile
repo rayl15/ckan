@@ -1,13 +1,9 @@
 RUN_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
 $(eval $(RUN_ARGS):;@:)
 
-pwd:=$(shell pwd)
 PATH:=$(PATH):./node_modules/.bin
 HOME=./keys
-timestamp=`date +%s`
 random:=$(shell bash -c 'echo $$RANDOM')
-
-DOCKERNS := axetwe
 
 usage:
 	@echo Please read README.md
@@ -18,9 +14,6 @@ ssh-keygen:
 
 install:
 	@npm install --save
-	@curl -L -s https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest > ./node_modules/.bin/ecs-cli
-	@curl -L -s https://github.com/docker/compose/releases/download/1.6.0-rc1/docker-compose-Linux-x86_64 > ./node_modules/.bin/docker-compose
-	@chmod +x ./node_modules/.bin/*
 
 cloud-config:
 	@cat cloud-config.template.yml keys/id_rsa.pub.snippet > \
@@ -28,10 +21,6 @@ cloud-config:
 
 ssh-core:
 	@ssh -i keys/id_rsa core@$(RUN_ARGS)
-
-configure-aws:
-	@aws configure
-	@read -r -p "ECS region: " region && ecs-cli configure -p default -c default --region $$region
 
 ps:
 	@ecs-cli ps
@@ -94,15 +83,3 @@ locations-aws:
 
 clean:
 	@rm -rf ./node_modules/*
-
-bash:
-	@docker run -it $(DOCKERNS)/$(RUN_ARGS) bash
-
-runcmd:
-	@docker run -it $(DOCKERNS)/$(RUN_ARGS)
-
-exec:
-	@docker exec -it `docker ps | grep $(DOCKERNS)/$(RUN_ARGS) | cut -d ' ' -f1`  bash
-
-stop:
-	@docker stop `docker ps | grep $(DOCKERNS)/$(RUN_ARGS) | cut -d ' ' -f1`
