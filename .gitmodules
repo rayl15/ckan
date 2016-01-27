@@ -4,3 +4,6 @@
 [submodule "3rdparty/ckan"]
 	path = 3rdparty/ckan
 	url = https://github.com/ckan/ckan
+[submodule "3rdparty/ckan-docker"]
+	path = 3rdparty/ckan-docker
+	url = https://github.com/ckan/ckan-docker
