@@ -7,3 +7,6 @@
 [submodule "3rdparty/ckan-docker"]
 	path = 3rdparty/ckan-docker
 	url = https://github.com/ckan/ckan-docker
+[submodule "3rdparty/docker-fiware-ckan"]
+	path = 3rdparty/docker-fiware-ckan
+	url = https://github.com/okfn/docker-fiware-ckan
