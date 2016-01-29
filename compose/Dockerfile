@@ -13,7 +13,7 @@ ENV SRC_DIR=${APP_DIR}/src
 RUN mkdir ${WORKSPACE} ${SRC_DIR}
 RUN cd ${SRC_DIR} && git clone -b ${GIT_BRANCH} --depth=1 --single-branch ${GIT_URL} ckan
 RUN cd ${SRC_DIR}/ckan && cp who.ini ${APP_DIR} && python setup.py install
-RUN cd ${SRC_DIR}/ckan && pip install --upgrade -r requirements.txt
+RUN cd ${SRC_DIR}/ckan && pip install -r requirements.txt
 
 COPY ${SETUP}/${APP_CONF} ${SUPERVISOR_DIR}/${APP_CONF}
 COPY ${SETUP} ${APP_DIR}
@@ -31,7 +31,7 @@ RUN ln -s ${APP_DIR}/ckan /usr/bin/ckan
 # https://bitbucket.org/pypa/setuptools/issues/491/setuptools-194-breaks-pip-install-builds
 # This can be removed once this is merged:
 # https://github.com/conwetlab/ckanext-oauth2/pull/7
-RUN pip install setuptools==19.3
+RUN pip install setuptools || exit 0
 
 # Install FIWARE specific extensions
 RUN pip install -e git+https://github.com/conwetlab/ckanext-datarequests.git#egg=ckanext-datarequests && \
