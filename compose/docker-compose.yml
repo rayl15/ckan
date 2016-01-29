@@ -1,7 +1,3 @@
-data:
-  build: data
-  hostname: data
-
 postgres:
   image: postgres:9.5.0
   hostname: postgres
@@ -21,7 +17,7 @@ datapusher:
   hostname: datapusher
 
 ckan:
-  image: fiware/ckan:2.5
+  build: .
   hostname: ckan
   ports:
     - "8000:8000"
@@ -29,8 +25,6 @@ ckan:
     - postgres:postgres
     - solr:solr
     - datapusher:datapusher
-  volumes_from:
-    - data
   volumes:
     - ./setup/production.ini:/srv/app/production.ini
   env_file: environment

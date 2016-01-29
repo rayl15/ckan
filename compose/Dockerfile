@@ -10,13 +10,10 @@ ENV GIT_URL=https://github.com/ckan/ckan.git
 ENV CKAN_INI=production.ini
 ENV SRC_DIR=${APP_DIR}/src
 
-RUN mkdir ${WORKSPACE} ${SRC_DIR} && cd ${SRC_DIR} && \
-    git clone -b ${GIT_BRANCH} --depth=1 --single-branch \
-    ${GIT_URL}  ckan && \
-    cd ckan && \
-    cp who.ini ${APP_DIR} && \
-    python setup.py install && \
-    pip install --upgrade -r requirements.txt
+RUN mkdir ${WORKSPACE} ${SRC_DIR}
+RUN cd ${SRC_DIR} && git clone -b ${GIT_BRANCH} --depth=1 --single-branch ${GIT_URL} ckan
+RUN cd ${SRC_DIR}/ckan && cp who.ini ${APP_DIR} && python setup.py install
+RUN cd ${SRC_DIR}/ckan && pip install --upgrade -r requirements.txt
 
 COPY ${SETUP}/${APP_CONF} ${SUPERVISOR_DIR}/${APP_CONF}
 COPY ${SETUP} ${APP_DIR}
