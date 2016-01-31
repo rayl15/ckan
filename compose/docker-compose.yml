@@ -17,7 +17,7 @@ datapusher:
   hostname: datapusher
 
 ckan:
-  build: .
+  image: fiware/ckan:2.5
   hostname: ckan
   ports:
     - "8000:8000"
