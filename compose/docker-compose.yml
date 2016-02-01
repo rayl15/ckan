@@ -1,5 +1,6 @@
 postgres:
   image: postgres:9.5.0
+  mem_limit: 52428800
   env_file: environment
   volumes:
     - ./postgres/create_ckan_database_objects.sh:/docker-entrypoint-initdb.d/create_ckan_database_objects.sh
@@ -7,5 +8,6 @@ postgres:
 
 solr:
   image: solr:5.4.1
+  mem_limit: 52428800
   volumes:
     - ./solr/ckan:/opt/solr/server/solr/ckan
