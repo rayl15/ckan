@@ -1,6 +1,5 @@
 postgres:
   image: postgres:9.5.0
-  hostname: postgres
   env_file: environment
   volumes:
     - ./postgres/create_ckan_database_objects.sh:/docker-entrypoint-initdb.d/create_ckan_database_objects.sh
@@ -8,6 +7,5 @@ postgres:
 
 solr:
   image: solr:5.4.1
-  hostname: solr
   volumes:
     - ./solr/ckan:/opt/solr/server/solr/ckan
