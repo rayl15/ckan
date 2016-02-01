@@ -11,20 +11,3 @@ solr:
   hostname: solr
   volumes:
     - ./solr/ckan:/opt/solr/server/solr/ckan
-
-datapusher:
-  build: datapusher
-  hostname: datapusher
-
-ckan:
-  image: fiware/ckan:2.5
-  hostname: ckan
-  ports:
-    - "8000:8000"
-  links:
-    - postgres:postgres
-    - solr:solr
-    - datapusher:datapusher
-  volumes:
-    - ./setup/production.ini:/srv/app/production.ini
-  env_file: environment
