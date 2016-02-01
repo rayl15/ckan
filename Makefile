@@ -76,7 +76,7 @@ list:
 
 create: cloud-config
 	@cp formation/Template.cloudformation Result.cloudformation
-	@cfnpp
+	@./node_modules/.bin/cfnpp
 	@aws cloudformation create-stack --stack-name core${random} --template-body file://.//Result.cloudformation
 
 locations-aws:
