@@ -3,11 +3,10 @@ postgres:
   mem_limit: 52428800
   env_file: environment
   volumes:
-    - ./postgres/create_ckan_database_objects.sh:/docker-entrypoint-initdb.d/create_ckan_database_objects.sh
-    - ./postgres/setup_remote_connections.sh:/docker-entrypoint-initdb.d/setup_remote_connections.sh
+    - postgres:/docker-entrypoint-initdb.d
 
 solr:
   image: solr:5.4.1
   mem_limit: 52428800
   volumes:
-    - ./solr/ckan:/opt/solr/server/solr/ckan
+    - solr:/opt/solr/server/solr
