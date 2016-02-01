@@ -1,0 +1,75 @@
+{
+    "taskDefinition": {
+        "status": "ACTIVE",
+        "family": "ecscompose-compose",
+        "volumes": [
+            {
+                "host": {
+                    "sourcePath": "./postgres/create_ckan_database_objects.sh"
+                },
+                "name": "volume-0"
+            },
+            {
+                "host": {
+                    "sourcePath": "./postgres/setup_remote_connections.sh"
+                },
+                "name": "volume-1"
+            },
+            {
+                "host": {
+                    "sourcePath": "./solr/ckan"
+                },
+                "name": "volume-2"
+            }
+        ],
+        "taskDefinitionArn": "arn:aws:ecs:eu-central-1:041473585611:task-definition/ecscompose-compose:12",
+        "containerDefinitions": [
+            {
+                "environment": [],
+                "name": "postgres",
+                "links": [],
+                "mountPoints": [
+                    {
+                        "sourceVolume": "volume-0",
+                        "readOnly": false,
+                        "containerPath": "/docker-entrypoint-initdb.d/create_ckan_database_objects.sh"
+                    },
+                    {
+                        "sourceVolume": "volume-1",
+                        "readOnly": false,
+                        "containerPath": "/docker-entrypoint-initdb.d/setup_remote_connections.sh"
+                    }
+                ],
+                "image": "postgres:9.5.0",
+                "essential": true,
+                "portMappings": [],
+                "entryPoint": [],
+                "memory": 50,
+                "command": [],
+                "cpu": 0,
+                "volumesFrom": []
+            },
+            {
+                "environment": [],
+                "name": "solr",
+                "links": [],
+                "mountPoints": [
+                    {
+                        "sourceVolume": "volume-2",
+                        "readOnly": false,
+                        "containerPath": "/opt/solr/server/solr/ckan"
+                    }
+                ],
+                "image": "solr:5.4.1",
+                "essential": true,
+                "portMappings": [],
+                "entryPoint": [],
+                "memory": 50,
+                "command": [],
+                "cpu": 0,
+                "volumesFrom": []
+            }
+        ],
+        "revision": 12
+    }
+}
