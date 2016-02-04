@@ -1,12 +1,9 @@
 postgres:
   image: postgres:9.5.0
   mem_limit: 52428800
-  env_file: environment
+  environment:
+    - CKAN_SQLALCHEMY_URL=postgresql://ckan_default:pass@postgres:5432/ckan_default
+    - CKAN_DATASTORE_WRITE_URL=postgresql://ckan_default:pass@postgres:5432/datastore_default
+    - CKAN_DATASTORE_READ_URL=postgresql://datastore_default:pass@postgres:5432/datastore_default
   volumes:
-    - postgres:/docker-entrypoint-initdb.d
-
-solr:
-  image: solr:5.4.1
-  mem_limit: 52428800
-  volumes:
-    - solr:/opt/solr/server/solr
+    - /home/core/ckan/compose/postgres:/docker-entrypoint-initdb.d
