@@ -2,74 +2,100 @@
     "taskDefinition": {
         "status": "ACTIVE",
         "family": "ecscompose-compose",
+        "requiresAttributes": [
+            {
+                "name": "com.amazonaws.ecs.capability.docker-remote-api.1.17"
+            },
+            {
+                "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+            }
+        ],
         "volumes": [
             {
                 "host": {
-                    "sourcePath": "./postgres/create_ckan_database_objects.sh"
-                },
-                "name": "volume-0"
-            },
-            {
-                "host": {
-                    "sourcePath": "./postgres/setup_remote_connections.sh"
+                    "sourcePath": "/home/core/ckan/compose/solr/ckan"
                 },
                 "name": "volume-1"
             },
             {
                 "host": {
-                    "sourcePath": "./solr/ckan"
+                    "sourcePath": "/home/core/ckan/compose/postgres"
                 },
-                "name": "volume-2"
+                "name": "volume-0"
             }
         ],
-        "taskDefinitionArn": "arn:aws:ecs:eu-central-1:041473585611:task-definition/ecscompose-compose:12",
+        "taskDefinitionArn": "arn:aws:ecs:eu-central-1:041473585611:task-definition/ecscompose-compose:32",
         "containerDefinitions": [
             {
-                "environment": [],
+                "dnsSearchDomains": [],
+                "environment": [
+                    {
+                        "name": "CKAN_SQLALCHEMY_URL",
+                        "value": "postgresql://ckan_default:pass@postgres:5432/ckan_default"
+                    },
+                    {
+                        "name": "CKAN_DATASTORE_WRITE_URL",
+                        "value": "postgresql://ckan_default:pass@postgres:5432/datastore_default"
+                    },
+                    {
+                        "name": "CKAN_DATASTORE_READ_URL",
+                        "value": "postgresql://datastore_default:pass@postgres:5432/datastore_default"
+                    }
+                ],
+                "readonlyRootFilesystem": false,
                 "name": "postgres",
                 "links": [],
                 "mountPoints": [
                     {
                         "sourceVolume": "volume-0",
                         "readOnly": false,
-                        "containerPath": "/docker-entrypoint-initdb.d/create_ckan_database_objects.sh"
-                    },
-                    {
-                        "sourceVolume": "volume-1",
-                        "readOnly": false,
-                        "containerPath": "/docker-entrypoint-initdb.d/setup_remote_connections.sh"
+                        "containerPath": "/docker-entrypoint-initdb.d"
                     }
                 ],
                 "image": "postgres:9.5.0",
+                "privileged": false,
                 "essential": true,
                 "portMappings": [],
+                "dnsServers": [],
+                "dockerSecurityOptions": [],
                 "entryPoint": [],
-                "memory": 50,
+                "ulimits": [],
+                "memory": 200,
                 "command": [],
+                "extraHosts": [],
                 "cpu": 0,
-                "volumesFrom": []
+                "volumesFrom": [],
+                "dockerLabels": {}
             },
             {
+                "dnsSearchDomains": [],
                 "environment": [],
+                "readonlyRootFilesystem": false,
                 "name": "solr",
                 "links": [],
                 "mountPoints": [
                     {
-                        "sourceVolume": "volume-2",
+                        "sourceVolume": "volume-1",
                         "readOnly": false,
                         "containerPath": "/opt/solr/server/solr/ckan"
                     }
                 ],
                 "image": "solr:5.4.1",
+                "privileged": false,
                 "essential": true,
                 "portMappings": [],
+                "dnsServers": [],
+                "dockerSecurityOptions": [],
                 "entryPoint": [],
-                "memory": 50,
+                "ulimits": [],
+                "memory": 200,
                 "command": [],
+                "extraHosts": [],
                 "cpu": 0,
-                "volumesFrom": []
+                "volumesFrom": [],
+                "dockerLabels": {}
             }
         ],
-        "revision": 12
+        "revision": 32
     }
 }
