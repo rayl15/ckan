@@ -7,3 +7,9 @@ postgres:
     - CKAN_DATASTORE_READ_URL=postgresql://datastore_default:pass@postgres:5432/datastore_default
   volumes:
     - /home/core/ckan/compose/postgres:/docker-entrypoint-initdb.d
+
+solr:
+  image: solr:5.4.1
+  mem_limit: 52428800
+  volumes:
+    - /home/core/ckan/compose/solr/ckan:/opt/solr/server/solr/ckan
