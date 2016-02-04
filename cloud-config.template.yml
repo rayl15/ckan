@@ -5,6 +5,22 @@ coreos:
     reboot-strategy: off
     group: beta
   units:
+    - name: git-pull.service
+      command: start
+      runtime: true
+      content: |
+        [Unit]
+        Description=git-pull
+        After=docker.service
+        Requires=docker.service
+
+        [Service]
+        TimeoutStartSec=1
+        ExecStart=/usr/bin/sh -c 'while true; do cd /home/core && (git -C ckan pull || git clone --depth 1 https://github.com/x-clone/ckan) && sleep 30; done'
+
+        [Install]
+        WantedBy=multi-user.target
+
     - name: amazon-ecs-agent.service
       command: start
       runtime: true
