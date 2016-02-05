@@ -1,5 +1,6 @@
 data:
   image: tianon/true
+  mem_limit: 2097152
   hostname: data
 
 postgres:
