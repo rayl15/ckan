@@ -17,3 +17,20 @@ solr:
   volumes:
     - /home/core/ckan/compose/solr/ckan:/opt/solr/server/solr/ckan
     - /home/core/ckan/compose/sbin/busybox:/sbin/busybox
+
+ckan:
+  image: fiware/ckan:2.5.0
+  mem_limit: 314572800
+  hostname: ckan
+  ports:
+    - "8000:8000"
+  links:
+    - postgres:postgres
+    - solr:solr
+  environment:
+    - CKAN_SQLALCHEMY_URL=postgresql://ckan_default:pass@postgres:5432/ckan_default
+    - CKAN_DATASTORE_WRITE_URL=postgresql://ckan_default:pass@postgres:5432/datastore_default
+    - CKAN_DATASTORE_READ_URL=postgresql://datastore_default:pass@postgres:5432/datastore_default
+  volumes:
+    - /home/core/ckan/compose/setup/production.ini:/srv/app/production.ini
+    - /home/core/ckan/compose/sbin/busybox:/sbin/busybox
