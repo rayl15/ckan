@@ -13,9 +13,21 @@
         "volumes": [
             {
                 "host": {
-                    "sourcePath": "/home/core/ckan/compose/solr/ckan"
+                    "sourcePath": "/home/core/ckan/compose/sbin/busybox"
                 },
                 "name": "volume-1"
+            },
+            {
+                "host": {
+                    "sourcePath": "/home/core/ckan/compose/solr/ckan"
+                },
+                "name": "volume-2"
+            },
+            {
+                "host": {
+                    "sourcePath": "/home/core/ckan/compose/setup/production.ini"
+                },
+                "name": "volume-3"
             },
             {
                 "host": {
@@ -24,7 +36,7 @@
                 "name": "volume-0"
             }
         ],
-        "taskDefinitionArn": "arn:aws:ecs:eu-central-1:041473585611:task-definition/ecscompose-compose:32",
+        "taskDefinitionArn": "arn:aws:ecs:eu-central-1:041473585611:task-definition/ecscompose-compose:47",
         "containerDefinitions": [
             {
                 "dnsSearchDomains": [],
@@ -50,21 +62,29 @@
                         "sourceVolume": "volume-0",
                         "readOnly": false,
                         "containerPath": "/docker-entrypoint-initdb.d"
+                    },
+                    {
+                        "sourceVolume": "volume-1",
+                        "readOnly": false,
+                        "containerPath": "/sbin/busybox"
                     }
                 ],
                 "image": "postgres:9.5.0",
+                "hostname": "postgres",
                 "privileged": false,
                 "essential": true,
                 "portMappings": [],
                 "dnsServers": [],
                 "dockerSecurityOptions": [],
                 "entryPoint": [],
-                "ulimits": [],
                 "memory": 200,
                 "command": [],
-                "extraHosts": [],
                 "cpu": 0,
-                "volumesFrom": [],
+                "volumesFrom": [
+                    {
+                        "sourceContainer": "data"
+                    }
+                ],
                 "dockerLabels": {}
             },
             {
@@ -75,27 +95,114 @@
                 "links": [],
                 "mountPoints": [
                     {
-                        "sourceVolume": "volume-1",
+                        "sourceVolume": "volume-2",
                         "readOnly": false,
                         "containerPath": "/opt/solr/server/solr/ckan"
+                    },
+                    {
+                        "sourceVolume": "volume-1",
+                        "readOnly": false,
+                        "containerPath": "/sbin/busybox"
                     }
                 ],
                 "image": "solr:5.4.1",
+                "hostname": "solr",
                 "privileged": false,
                 "essential": true,
                 "portMappings": [],
                 "dnsServers": [],
                 "dockerSecurityOptions": [],
                 "entryPoint": [],
-                "ulimits": [],
-                "memory": 200,
+                "memory": 300,
                 "command": [],
-                "extraHosts": [],
                 "cpu": 0,
                 "volumesFrom": [],
                 "dockerLabels": {}
+            },
+            {
+                "dnsSearchDomains": [],
+                "environment": [
+                    {
+                        "name": "CKAN_SQLALCHEMY_URL",
+                        "value": "postgresql://ckan_default:pass@postgres:5432/ckan_default"
+                    },
+                    {
+                        "name": "CKAN_DATASTORE_WRITE_URL",
+                        "value": "postgresql://ckan_default:pass@postgres:5432/datastore_default"
+                    },
+                    {
+                        "name": "CKAN_DATASTORE_READ_URL",
+                        "value": "postgresql://datastore_default:pass@postgres:5432/datastore_default"
+                    }
+                ],
+                "readonlyRootFilesystem": false,
+                "name": "ckan",
+                "links": [
+                    "postgres:postgres",
+                    "solr:solr"
+                ],
+                "mountPoints": [
+                    {
+                        "sourceVolume": "volume-3",
+                        "readOnly": false,
+                        "containerPath": "/srv/app/production.ini"
+                    },
+                    {
+                        "sourceVolume": "volume-1",
+                        "readOnly": false,
+                        "containerPath": "/sbin/busybox"
+                    }
+                ],
+                "image": "fiware/ckan:2.5",
+                "hostname": "ckan",
+                "privileged": false,
+                "essential": true,
+                "portMappings": [
+                    {
+                        "protocol": "tcp",
+                        "containerPort": 8000,
+                        "hostPort": 8000
+                    }
+                ],
+                "dnsServers": [],
+                "dockerSecurityOptions": [],
+                "entryPoint": [],
+                "memory": 300,
+                "command": [],
+                "cpu": 0,
+                "volumesFrom": [
+                    {
+                        "sourceContainer": "data"
+                    }
+                ],
+                "dockerLabels": {}
+            },
+            {
+                "dnsSearchDomains": [],
+                "environment": [],
+                "readonlyRootFilesystem": false,
+                "name": "data",
+                "links": [],
+                "mountPoints": [],
+                "image": "axetwe/data",
+                "hostname": "data",
+                "privileged": false,
+                "essential": false,
+                "portMappings": [],
+                "dnsServers": [],
+                "dockerSecurityOptions": [],
+                "entryPoint": [
+                    "sh",
+                    "-c"
+                ],
+                "memory": 20,
+                "command": [
+                    "\"sleep 99999999\""
+                ],
+                "cpu": 1,
+                "volumesFrom": []
             }
         ],
-        "revision": 32
+        "revision": 47
     }
 }
