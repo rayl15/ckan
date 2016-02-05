@@ -1,6 +1,7 @@
 postgres:
   image: postgres:9.5.0
   mem_limit: 209715200
+  hostname: postgres
   environment:
     - CKAN_SQLALCHEMY_URL=postgresql://ckan_default:pass@postgres:5432/ckan_default
     - CKAN_DATASTORE_WRITE_URL=postgresql://ckan_default:pass@postgres:5432/datastore_default
@@ -11,7 +12,8 @@ postgres:
 
 solr:
   image: solr:5.4.1
-  mem_limit: 209715200
+  mem_limit: 314572800
+  hostname: solr
   volumes:
     - /home/core/ckan/compose/solr/ckan:/opt/solr/server/solr/ckan
     - /home/core/ckan/compose/sbin/busybox:/sbin/busybox
