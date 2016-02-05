@@ -1,5 +1,5 @@
 data:
-  image: tianon/true
+  image: axetwe/data
   mem_limit: 2097152
   hostname: data
 
@@ -14,6 +14,8 @@ postgres:
   volumes:
     - /home/core/ckan/compose/postgres:/docker-entrypoint-initdb.d
     - /home/core/ckan/compose/sbin/busybox:/sbin/busybox
+  volumes_from:
+    - data
 
 solr:
   image: solr:5.4.1
