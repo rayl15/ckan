@@ -19,7 +19,7 @@ solr:
     - /home/core/ckan/compose/sbin/busybox:/sbin/busybox
 
 ckan:
-  image: fiware/ckan:2.5.0
+  image: fiware/ckan:2.5
   mem_limit: 314572800
   hostname: ckan
   ports:
