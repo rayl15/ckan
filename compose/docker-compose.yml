@@ -1,3 +1,7 @@
+data:
+  image: tianon/true
+  hostname: data
+
 postgres:
   image: postgres:9.5.0
   mem_limit: 209715200
@@ -27,6 +31,8 @@ ckan:
   links:
     - postgres:postgres
     - solr:solr
+  volumes_from:
+    - data
   environment:
     - CKAN_SQLALCHEMY_URL=postgresql://ckan_default:pass@postgres:5432/ckan_default
     - CKAN_DATASTORE_WRITE_URL=postgresql://ckan_default:pass@postgres:5432/datastore_default
