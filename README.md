@@ -2,6 +2,8 @@ In a nutshell:
 
 Set variables AWS_ACCESS_KEY_ID, AWS_SECRET_KEY, AWS_DEFAULT_REGION and install make, aws-cli, ecs-cli, nodejs. Optionally docker-compose.
 
+ecs-cli from the official repo doesn't support "restart: no" yet, custom built one is [here](http://beehub.nl/home/xaduha/public/bin/ecs-cli).
+
     1. npm install --save
     2. make ssh-keygen
     3. make cluster
