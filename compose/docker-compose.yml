@@ -2,6 +2,7 @@ data:
   image: axetwe/data
   mem_limit: 2097152
   hostname: data
+  restart: no
 
 postgres:
   image: postgres:9.5.0
