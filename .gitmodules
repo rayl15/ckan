@@ -10,3 +10,6 @@
 [submodule "3rdparty/docker-fiware-ckan"]
 	path = 3rdparty/docker-fiware-ckan
 	url = https://github.com/okfn/docker-fiware-ckan
+[submodule "3rdparty/amazon-ecs-cli"]
+	path = 3rdparty/amazon-ecs-cli
+	url = https://github.com/x-clone/amazon-ecs-cli
