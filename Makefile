@@ -63,7 +63,6 @@ list-definitions:
 	@aws ecs list-task-definitions
 
 describe:
-	@echo describing definition number $(RUN_ARGS)
 	@aws ecs describe-task-definition --task-definition ecscompose-compose:$(RUN_ARGS)
 
 deregister:

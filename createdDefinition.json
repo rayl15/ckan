@@ -13,6 +13,12 @@
         "volumes": [
             {
                 "host": {
+                    "sourcePath": "/home/core/ckan/compose/postgres"
+                },
+                "name": "volume-0"
+            },
+            {
+                "host": {
                     "sourcePath": "/home/core/ckan/compose/sbin/busybox"
                 },
                 "name": "volume-1"
@@ -28,16 +34,33 @@
                     "sourcePath": "/home/core/ckan/compose/setup/production.ini"
                 },
                 "name": "volume-3"
-            },
-            {
-                "host": {
-                    "sourcePath": "/home/core/ckan/compose/postgres"
-                },
-                "name": "volume-0"
             }
         ],
-        "taskDefinitionArn": "arn:aws:ecs:eu-central-1:041473585611:task-definition/ecscompose-compose:47",
+        "taskDefinitionArn": "arn:aws:ecs:eu-central-1:041473585611:task-definition/ecscompose-compose:52",
         "containerDefinitions": [
+            {
+                "dnsSearchDomains": [],
+                "environment": [],
+                "readonlyRootFilesystem": false,
+                "name": "data",
+                "links": [],
+                "mountPoints": [],
+                "image": "axetwe/data",
+                "hostname": "data",
+                "privileged": false,
+                "essential": false,
+                "portMappings": [],
+                "dnsServers": [],
+                "dockerSecurityOptions": [],
+                "entryPoint": [],
+                "ulimits": [],
+                "memory": 2,
+                "command": [],
+                "extraHosts": [],
+                "cpu": 0,
+                "volumesFrom": [],
+                "dockerLabels": {}
+            },
             {
                 "dnsSearchDomains": [],
                 "environment": [
@@ -77,8 +100,10 @@
                 "dnsServers": [],
                 "dockerSecurityOptions": [],
                 "entryPoint": [],
+                "ulimits": [],
                 "memory": 200,
                 "command": [],
+                "extraHosts": [],
                 "cpu": 0,
                 "volumesFrom": [
                     {
@@ -113,8 +138,10 @@
                 "dnsServers": [],
                 "dockerSecurityOptions": [],
                 "entryPoint": [],
+                "ulimits": [],
                 "memory": 300,
                 "command": [],
+                "extraHosts": [],
                 "cpu": 0,
                 "volumesFrom": [],
                 "dockerLabels": {}
@@ -167,8 +194,10 @@
                 "dnsServers": [],
                 "dockerSecurityOptions": [],
                 "entryPoint": [],
+                "ulimits": [],
                 "memory": 300,
                 "command": [],
+                "extraHosts": [],
                 "cpu": 0,
                 "volumesFrom": [
                     {
@@ -176,33 +205,8 @@
                     }
                 ],
                 "dockerLabels": {}
-            },
-            {
-                "dnsSearchDomains": [],
-                "environment": [],
-                "readonlyRootFilesystem": false,
-                "name": "data",
-                "links": [],
-                "mountPoints": [],
-                "image": "axetwe/data",
-                "hostname": "data",
-                "privileged": false,
-                "essential": false,
-                "portMappings": [],
-                "dnsServers": [],
-                "dockerSecurityOptions": [],
-                "entryPoint": [
-                    "sh",
-                    "-c"
-                ],
-                "memory": 20,
-                "command": [
-                    "\"sleep 99999999\""
-                ],
-                "cpu": 1,
-                "volumesFrom": []
             }
         ],
-        "revision": 47
+        "revision": 52
     }
 }
