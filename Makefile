@@ -25,18 +25,18 @@ ssh-core:
 ps:
 	@ecs-cli ps
 
-ecs-compose-up:
+template:
 	@rm -f keys/docker-compose.yml
 	@sed \
 		-e "s|CKAN_SQLALCHEMY_URL|CKAN_SQLALCHEMY_URL=${CKAN_SQLALCHEMY_URL}|g" \
 		-e "s|CKAN_DATASTORE_WRITE_URL|CKAN_DATASTORE_WRITE_URL=${CKAN_DATASTORE_WRITE_URL}|g" \
 		-e "s|CKAN_DATASTORE_READ_URL|CKAN_DATASTORE_READ_URL=${CKAN_DATASTORE_READ_URL}|g" \
 		compose/docker-compose.template.yml > keys/docker-compose.yml
+
+ecs-compose-up: template
 	@ecs-cli compose -f keys/docker-compose.yml up
 
-ecs-compose-stop:
-	@rm -f keys/docker-compose.yml
-	@cp compose/docker-compose.template.yml
+ecs-compose-stop: template
 	@ecs-cli compose -f keys/docker-compose.yml stop
 
 policies:
