@@ -5,8 +5,6 @@ PATH:=$(PATH):./node_modules/.bin
 HOME=./keys
 random:=$(shell bash -c 'echo $$RANDOM')
 
-bucket='600b5e0b-6447-416a-a87c-8736cf2af0c3'
-
 usage:
 	@echo Please read README.md
 
@@ -28,10 +26,18 @@ ps:
 	@ecs-cli ps
 
 ecs-compose-up:
-	@ecs-cli compose -f compose/docker-compose.yml up
+	@rm -f keys/docker-compose.yml
+	@sed \
+		-e "s|CKAN_SQLALCHEMY_URL|CKAN_SQLALCHEMY_URL=${CKAN_SQLALCHEMY_URL}|g" \
+		-e "s|CKAN_DATASTORE_WRITE_URL|CKAN_DATASTORE_WRITE_URL=${CKAN_DATASTORE_WRITE_URL}|g" \
+		-e "s|CKAN_DATASTORE_READ_URL|CKAN_DATASTORE_READ_URL=${CKAN_DATASTORE_READ_URL}|g" \
+		compose/docker-compose.template.yml > keys/docker-compose.yml
+	@ecs-cli compose -f keys/docker-compose.yml up
 
 ecs-compose-stop:
-	@ecs-cli compose -f compose/docker-compose.yml stop
+	@rm -f keys/docker-compose.yml
+	@cp compose/docker-compose.template.yml
+	@ecs-cli compose -f keys/docker-compose.yml stop
 
 policies:
 	@echo disabled
@@ -39,7 +45,8 @@ policies:
 	@#aws iam attach-role-policy --role-name=ecsInstanceRole --policy-arn=arn:aws:iam::aws:policy/AmazonRDSFullAccess
 
 put:
-	@aws s3 cp compose/environment s3://${bucket}/shared/environment
+	@echo disabled
+	@#aws s3 cp compose/environment s3://${bucket}/shared/environment
 
 list-tasks:
 	@aws ecs list-tasks --cluster default
