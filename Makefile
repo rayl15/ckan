@@ -34,8 +34,9 @@ ecs-compose-stop:
 	@ecs-cli compose -f compose/docker-compose.yml stop
 
 policies:
-	@aws iam attach-role-policy --role-name=ecsInstanceRole --policy-arn=arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
-	@aws iam attach-role-policy --role-name=ecsInstanceRole --policy-arn=arn:aws:iam::aws:policy/AmazonRDSFullAccess
+	@echo disabled
+	@#aws iam attach-role-policy --role-name=ecsInstanceRole --policy-arn=arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
+	@#aws iam attach-role-policy --role-name=ecsInstanceRole --policy-arn=arn:aws:iam::aws:policy/AmazonRDSFullAccess
 
 put:
 	@aws s3 cp compose/environment s3://${bucket}/shared/environment
