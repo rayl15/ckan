@@ -40,9 +40,8 @@ ecs-compose-stop: template
 	@ecs-cli compose -f keys/docker-compose.yml stop
 
 policies:
-	@echo disabled
+	@aws iam attach-role-policy --role-name=ecsInstanceRole --policy-arn=arn:aws:iam::aws:policy/AmazonRDSFullAccess
 	@#aws iam attach-role-policy --role-name=ecsInstanceRole --policy-arn=arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
-	@#aws iam attach-role-policy --role-name=ecsInstanceRole --policy-arn=arn:aws:iam::aws:policy/AmazonRDSFullAccess
 
 put:
 	@echo disabled
