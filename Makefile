@@ -33,6 +33,10 @@ template:
 		-e "s|CKAN_DATASTORE_READ_URL|CKAN_DATASTORE_READ_URL=${CKAN_DATASTORE_READ_URL}|g" \
 		compose/docker-compose.template.yml > keys/docker-compose.yml
 
+up: ecs-compose-up
+
+stop: ecs-compose-stop
+
 ecs-compose-up: template
 	@ecs-cli compose -f keys/docker-compose.yml up
 
