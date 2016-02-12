@@ -9,6 +9,8 @@ postgres:
   mem_limit: 209715200
   hostname: postgres
   environment:
+    - RDS_USERNAME
+    - RDS_PASSWORD
     - CKAN_SQLALCHEMY_URL
     - CKAN_DATASTORE_WRITE_URL
     - CKAN_DATASTORE_READ_URL
