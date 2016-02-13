@@ -18,7 +18,7 @@ ecs-cli from the official repo doesn't support "restart: no" yet, custom built o
 
 `make list` shows running instances, their IDs and IPs.
 
-`make ssh-core <IP>` allows to ssh into an intance.
+`make ssh <IP>` allows to ssh into an intance.
 
 `make ecs-compose-up` launches containers defined by 'compose/docker-compose.yml'.
 

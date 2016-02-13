@@ -19,7 +19,7 @@ cloud-config:
 	@cat cloud-config.template.yml keys/id_rsa.pub.snippet > \
 	  Result.cloudformation.d/resources/EcsInstanceLcWithoutKeyPair/userdata
 
-ssh-core:
+ssh:
 	@ssh -i keys/id_rsa core@$(RUN_ARGS)
 
 ps:
