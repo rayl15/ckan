@@ -10,9 +10,6 @@ postgres:
   hostname: postgres
   environment:
     - PGUSER
-    - PGPASSWORD
-    - PGPORT
-    - PGHOST
     - CKAN_SQLALCHEMY_URL
     - CKAN_DATASTORE_WRITE_URL
     - CKAN_DATASTORE_READ_URL
@@ -43,9 +40,6 @@ ckan:
     - data
   environment:
     - PGUSER
-    - PGPASSWORD
-    - PGPORT
-    - PGHOST
     - CKAN_SQLALCHEMY_URL
     - CKAN_DATASTORE_WRITE_URL
     - CKAN_DATASTORE_READ_URL

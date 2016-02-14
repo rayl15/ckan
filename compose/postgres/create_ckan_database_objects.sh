@@ -1,7 +1,5 @@
 #!/bin/bash
 
-export PGUSER=postgres
-
 IFS='/' read -ra CONN_DETAILS_1 <<< "$CKAN_SQLALCHEMY_URL"
 IFS='@' read -ra CONN_DETAILS_2 <<< "${CONN_DETAILS_1[2]}"
 IFS=':' read -ra CONN_DETAILS_3 <<< "${CONN_DETAILS_2[0]}"
