@@ -9,8 +9,10 @@ postgres:
   mem_limit: 209715200
   hostname: postgres
   environment:
-    - RDS_USERNAME
-    - RDS_PASSWORD
+    - PGUSER
+    - PGPASSWORD
+    - PGPORT
+    - PGHOST
     - CKAN_SQLALCHEMY_URL
     - CKAN_DATASTORE_WRITE_URL
     - CKAN_DATASTORE_READ_URL
@@ -40,6 +42,10 @@ ckan:
   volumes_from:
     - data
   environment:
+    - PGUSER
+    - PGPASSWORD
+    - PGPORT
+    - PGHOST
     - CKAN_SQLALCHEMY_URL
     - CKAN_DATASTORE_WRITE_URL
     - CKAN_DATASTORE_READ_URL
