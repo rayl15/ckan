@@ -10,6 +10,9 @@ postgres:
   hostname: postgres
   environment:
     - PGUSER
+    - CKAN_SQLALCHEMY_URL
+    - CKAN_DATASTORE_WRITE_URL
+    - CKAN_DATASTORE_READ_URL
     - CKAN_DB_NAME=ckan_default
     - CKAN_DB_USER=ckan_default
     - CKAN_DATASTORE_DB_NAME=datastore_default
