@@ -10,12 +10,14 @@ postgres:
   hostname: postgres
   environment:
     - PGUSER
-    - CKAN_SQLALCHEMY_URL
-    - CKAN_DATASTORE_WRITE_URL
-    - CKAN_DATASTORE_READ_URL
     - CKAN_DB_NAME=ckan_default
     - CKAN_DB_USER=ckan_default
+    - CKAN_DATASTORE_DB_NAME=datastore_default
+    - CKAN_DATASTORE_RW_DB_USER=ckan_default
+    - CKAN_DATASTORE_RO_DB_USER=datastore_default
     - CKAN_DB_USER_PASS=pass
+    - CKAN_DATASTORE_RW_DB_USER_PASS=pass
+    - CKAN_DATASTORE_RO_DB_USER_PASS=pass
   volumes:
     - /home/core/ckan/compose/postgres:/docker-entrypoint-initdb.d
     - /home/core/ckan/compose/sbin/busybox:/sbin/busybox
