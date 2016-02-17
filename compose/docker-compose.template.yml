@@ -8,6 +8,7 @@ postgres:
   image: postgres:9.5.0
   mem_limit: 209715200
   hostname: postgres
+  restart: no
   environment:
     - PGUSER
     - PGHOST
