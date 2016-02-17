@@ -2,6 +2,24 @@ In a nutshell:
 
 Set variables AWS_ACCESS_KEY_ID, AWS_SECRET_KEY, AWS_DEFAULT_REGION and install make, aws-cli, ecs-cli, nodejs. Optionally docker-compose.
 
+To use RDS set the following env variables:
+
+- PGUSER (e.g. masterusername)
+- PGHOST (e.g. dbinstance.abcdefg.eu-central-1.rds.amazonaws.com)
+- PGPORT (e.g 5432)
+- PGPASSWORD (e.g. masterpassword)
+
+For testing purposes set following variables as is:
+
+- CKAN_DB_NAME=ckan_default
+- CKAN_DB_USER=ckan_default
+- CKAN_DATASTORE_DB_NAME=datastore_default
+- CKAN_DATASTORE_RW_DB_USER=ckan_default
+- CKAN_DATASTORE_RO_DB_USER=datastore_default
+- CKAN_DB_USER_PASS=pass
+- CKAN_DATASTORE_RW_DB_USER_PASS=pass
+- CKAN_DATASTORE_RO_DB_USER_PASS=pass
+
 ecs-cli from the official repo doesn't support "restart: no" yet, custom built one is [here](http://beehub.nl/home/xaduha/public/bin/ecs-cli).
 
     1. npm install --save
