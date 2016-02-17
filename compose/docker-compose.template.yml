@@ -9,6 +9,7 @@ postgres:
   mem_limit: 209715200
   hostname: postgres
   restart: no
+  command: /docker-entrypoint-initdb.d/create_ckan_database_objects.sh
   environment:
     - PGUSER
     - PGHOST
