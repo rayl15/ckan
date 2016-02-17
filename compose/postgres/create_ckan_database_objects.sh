@@ -28,5 +28,5 @@ GRANT SELECT ON TABLES TO ${CKAN_DATASTORE_RO_DB_USER};
 cat /toRun1.sql
 cat /toRun2.sql
 
-psql -f /toRun1.sql --host ${PGHOST} --port ${PGPORT} --username ${PGUSER} --password ${PGPASSWORD}
-psql -f /toRun2.sql --host ${PGHOST} --port ${PGPORT} --username ${PGUSER} --password ${PGPASSWORD}
+psql -f /toRun1.sql
+psql -f /toRun2.sql
