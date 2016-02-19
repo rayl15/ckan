@@ -13,3 +13,6 @@
 [submodule "3rdparty/amazon-ecs-cli"]
 	path = 3rdparty/amazon-ecs-cli
 	url = https://github.com/x-clone/amazon-ecs-cli
+[submodule "3rdparty/mo"]
+	path = 3rdparty/mo
+	url = https://github.com/tests-always-included/mo
