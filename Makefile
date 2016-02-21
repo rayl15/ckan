@@ -1,7 +1,7 @@
 RUN_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
 $(eval $(RUN_ARGS):;@:)
 
-PATH:=$(PATH):./node_modules/.bin
+PATH:=$(PATH):./bin:./node_modules/.bin
 HOME=./keys
 random:=$(shell bash -c 'echo $$RANDOM')
 
@@ -27,15 +27,7 @@ ps:
 
 template:
 	@rm -f keys/docker-compose.yml
-	@sed \
-		-e "s|CKAN_SQLALCHEMY_URL.*$$|CKAN_SQLALCHEMY_URL=postgresql://${CKAN_DB_USER}:${CKAN_DB_USER_PASS}@${PGHOST}:${PGPORT}/${CKAN_DB_NAME}|g" \
-		-e "s|CKAN_DATASTORE_WRITE_URL.*$$|CKAN_DATASTORE_WRITE_URL=postgresql://${CKAN_DATASTORE_RW_DB_USER}:${CKAN_DATASTORE_RW_DB_USER_PASS}@${PGHOST}:${PGPORT}/${CKAN_DATASTORE_DB_NAME}|g" \
-		-e "s|CKAN_DATASTORE_READ_URL.*$$|CKAN_DATASTORE_READ_URL=postgresql://${CKAN_DATASTORE_RO_DB_USER}:${CKAN_DATASTORE_RO_DB_USER_PASS}@${PGHOST}:${PGPORT}/${CKAN_DATASTORE_DB_NAME}|g" \
-		-e "s|PGUSER.*$$|PGUSER=${PGUSER}|g" \
-		-e "s|PGPORT.*$$|PGPORT=${PGPORT}|g" \
-		-e "s|PGHOST.*$$|PGHOST=${PGHOST}|g" \
-		-e "s|PGPASSWORD.*$$|PGPASSWORD=${PGPASSWORD}|g" \
-		compose/docker-compose.template.yml > keys/docker-compose.yml
+	@cat compose/docker-compose.template.yml | ./bin/mo > keys/docker-compose.yml
 
 up: ecs-compose-up
 

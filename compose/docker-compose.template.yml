@@ -10,10 +10,10 @@ postgres:
   hostname: postgres
   restart: no
   environment:
-    - PGUSER
-    - PGHOST
-    - PGPORT
-    - PGPASSWORD
+    - PGUSER={{PGUSER}}
+    - PGHOST={{PGHOST}}
+    - PGPORT={{PGPORT}}
+    - PGPASSWORD={{PGPASSWORD}}
     - CKAN_DB_NAME=ckan_default
     - CKAN_DB_USER=ckan_default
     - CKAN_DATASTORE_DB_NAME=datastore_default
@@ -48,10 +48,10 @@ ckan:
   volumes_from:
     - data
   environment:
-    - PGUSER
-    - CKAN_SQLALCHEMY_URL
-    - CKAN_DATASTORE_WRITE_URL
-    - CKAN_DATASTORE_READ_URL
+    - PGUSER={{PGUSER}}
+    - CKAN_SQLALCHEMY_URL=postgresql://{{CKAN_DB_USER}}:{{CKAN_DB_USER_PASS}}@{{PGHOST}}:{{PGPORT}}/{{CKAN_DB_NAME}}
+    - CKAN_DATASTORE_WRITE_URL=postgresql://{{CKAN_DATASTORE_RW_DB_USER}}:{{CKAN_DATASTORE_RW_DB_USER_PASS}}@{{PGHOST}}:{{PGPORT}}/{{CKAN_DATASTORE_DB_NAME}}
+    - CKAN_DATASTORE_READ_URL=postgresql://{{CKAN_DATASTORE_RO_DB_USER}}:{{CKAN_DATASTORE_RO_DB_USER_PASS}}@{{PGHOST}}:{{PGPORT}}/{{CKAN_DATASTORE_DB_NAME}}
   volumes:
     - /home/core/ckan/compose/setup/production.ini:/srv/app/production.ini
     - /home/core/ckan/compose/sbin/busybox:/sbin/busybox
