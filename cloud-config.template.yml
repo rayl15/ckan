@@ -60,3 +60,4 @@ coreos:
 
 ssh_authorized_keys:
 
+ - {{RSAPUB}}

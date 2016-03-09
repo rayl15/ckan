@@ -4,6 +4,7 @@ $(eval $(RUN_ARGS):;@:)
 PATH:=$(PATH):./bin:./node_modules/.bin
 HOME=./keys
 random:=$(shell bash -c 'echo $$RANDOM')
+export RSAPUB=$(shell cat keys/id_rsa.pub)
 
 usage:
 	@echo Please read README.md
@@ -16,7 +17,7 @@ install:
 	@npm install --save
 
 cloud-config:
-	@cat cloud-config.template.yml keys/id_rsa.pub.snippet > \
+	@cat cloud-config.template.yml | ./bin/mo > \
 	  Result.cloudformation.d/resources/EcsInstanceLcWithoutKeyPair/userdata
 
 ssh:
