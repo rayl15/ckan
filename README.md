@@ -20,6 +20,10 @@ For testing purposes set following variables as is:
 - CKAN_DATASTORE_RW_DB_USER_PASS=pass
 - CKAN_DATASTORE_RO_DB_USER_PASS=pass
 
+For NFS set the following variable, for example:
+
+- NFSADDRESS=localhost:/data
+
 ecs-cli from the official repo doesn't support "restart: no" yet, custom built one is [here](http://beehub.nl/home/xaduha/public/bin/ecs-cli).
 
     1. npm install --save

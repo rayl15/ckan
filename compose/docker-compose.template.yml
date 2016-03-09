@@ -47,6 +47,8 @@ ckan:
     - solr:solr
   volumes_from:
     - data
+  volumes:
+    - /home/core/data:/var/lib/ckan
   environment:
     - PGUSER={{PGUSER}}
     - CKAN_SQLALCHEMY_URL=postgresql://{{CKAN_DB_USER}}:{{CKAN_DB_USER_PASS}}@{{PGHOST}}:{{PGPORT}}/{{CKAN_DB_NAME}}

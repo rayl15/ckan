@@ -5,6 +5,27 @@ coreos:
     reboot-strategy: off
     group: beta
   units:
+    - name: nfs-mount.service
+      command: start
+      runtime: true
+      content: |
+        [Unit]
+        Description=nfs-mount
+        After=docker.service
+        Requires=docker.service
+
+        [Service]
+        ExecStartPre=-/usr/sbin/modprobe nfsd
+        ExecStartPre=-/usr/bin/mkdir -p /home/core/data
+        ExecStartPre=-/usr/bin/chmod 777 /home/core/data
+        TimeoutStartSec=1
+        Restart=on-failure
+        RestartSec=5
+        ExecStart=/usr/bin/mount -t nfs4 {{NFSADDRESS}} /home/core/data
+
+        [Install]
+        WantedBy=multi-user.target
+
     - name: git-pull.service
       command: start
       runtime: true
