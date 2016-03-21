@@ -18,9 +18,10 @@ coreos:
         ExecStartPre=-/usr/sbin/modprobe nfsd
         ExecStartPre=-/usr/bin/mkdir -p /home/core/data
         ExecStartPre=-/usr/bin/chmod 777 /home/core/data
+        ExecStartPre=-/usr/bin/sh -c "echo 3 > /proc/sys/vm/drop_caches"
         TimeoutStartSec=1
         Restart=on-failure
-        RestartSec=5
+        RestartSec=30
         ExecStart=/usr/bin/mount -t nfs4 {{NFSADDRESS}} /home/core/data
 
         [Install]
