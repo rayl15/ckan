@@ -92,16 +92,32 @@ task:
 delete:
 	@aws cloudformation delete-stack --stack-name $(RUN_ARGS)
 
+delete-db-instance:
+	@aws rds delete-db-instance --db-instance-identifier $(RUN_ARGS) --skip-final-snapshot
+
 list:
 	@aws ec2 describe-instances \
 		--filters Name=instance-state-name,Values=running \
 		--query 'Reservations[].Instances[].[Tags[?Key==`aws:cloudformation:stack-name`] | [0].Value, InstanceId,PublicIpAddress,InstanceType,Placement.AvailabilityZone,State.Name]' \
 		--output table
 
+testlist:
+	@aws ec2 describe-instances #--output table
+
+list-db-instances:
+	@aws rds describe-db-instances \
+		--output table
+
 create: cloud-config
 	@cp formation/Template.cloudformation Result.cloudformation
 	@./node_modules/.bin/cfnpp
 	@aws cloudformation create-stack --stack-name core${random} --template-body file://.//Result.cloudformation
+
+create-db-instance:
+	@aws rds create-db-instance --db-instance-identifier $(RUN_ARGS) --db-instance-class db.t2.micro --engine postgres --master-username mymasterpassword --master-user-password mymasterpassword --allocated-storage 5
+
+testcreate:
+	@aws rds create-db-instance --db-instance-identifier $(RUN_ARGS) --db-instance-class db.t2.micro --engine postgres --master-username mymasterpassword --master-user-password mymasterpassword --allocated-storage 5 help
 
 locations-aws:
 	@aws ec2 describe-regions --output table
