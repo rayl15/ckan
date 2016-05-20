@@ -5,37 +5,37 @@
     "RegionMap": {
 
       "eu-central-1": {
-        "AMI": "ami-e83ddb87"
+        "AMI": "ami-cd4eaca2"
       },
       "ap-northeast-1": {
-        "AMI": "ami-67e9fd09"
+        "AMI": "ami-ba8762db"
       },
       "us-gov-west-1": {
-        "AMI": "ami-6d38840c"
+        "AMI": "ami-07912e66"
       },
       "ap-northeast-2": {
-        "AMI": "ami-aca76ec2"
+        "AMI": "ami-bf5b93d1"
       },
       "sa-east-1": {
-        "AMI": "ami-9666eafa"
+        "AMI": "ami-fd6ae391"
       },
       "ap-southeast-2": {
-        "AMI": "ami-9a7d5ef9"
+        "AMI": "ami-520f2331"
       },
       "ap-southeast-1": {
-        "AMI": "ami-b8d319db"
+        "AMI": "ami-e02dfa83"
       },
       "us-east-1": {
-        "AMI": "ami-cfaba5a5"
+        "AMI": "ami-b1af4cdc"
       },
       "us-west-2": {
-        "AMI": "ami-141df674"
+        "AMI": "ami-19c63479"
       },
       "us-west-1": {
-        "AMI": "ami-6c037e0c"
+        "AMI": "ami-d27a03b2"
       },
       "eu-west-1": {
-        "AMI": "ami-d149cea2"
+        "AMI": "ami-8f27affc"
       }
 
     },
