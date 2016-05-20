@@ -114,10 +114,10 @@ create: cloud-config
 	@aws cloudformation create-stack --stack-name core${random} --template-body file://.//Result.cloudformation
 
 create-db-instance:
-	@aws rds create-db-instance --db-instance-identifier $(RUN_ARGS) --db-instance-class db.t2.micro --engine postgres --master-username mymasterpassword --master-user-password mymasterpassword --allocated-storage 5
+	@aws rds create-db-instance --db-instance-identifier $(RUN_ARGS) --db-instance-class db.t2.micro --engine postgres --master-username mymasterusername --master-user-password mymasterpassword --allocated-storage 5
 
 testcreate:
-	@aws rds create-db-instance --db-instance-identifier $(RUN_ARGS) --db-instance-class db.t2.micro --engine postgres --master-username mymasterpassword --master-user-password mymasterpassword --allocated-storage 5 help
+	@aws rds create-db-instance --db-instance-identifier $(RUN_ARGS) --db-instance-class db.t2.micro --engine postgres --master-username mymasterusername --master-user-password mymasterpassword --allocated-storage 5 help
 
 locations-aws:
 	@aws ec2 describe-regions --output table
