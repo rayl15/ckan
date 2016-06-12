@@ -1,19 +1,10 @@
-data:
-  image: axetwe/data
-  mem_limit: 2097152
-  hostname: data
-  restart: no
-
+{{^RDS}}
 postgres:
-  image: postgres:9.5.0
+  image: mdillon/postgis:9.5
   mem_limit: 209715200
   hostname: postgres
-  restart: no
+  restart: "no"
   environment:
-    - PGUSER={{PGUSER}}
-    - PGHOST={{PGHOST}}
-    - PGPORT={{PGPORT}}
-    - PGPASSWORD={{PGPASSWORD}}
     - CKAN_DB_NAME=ckan_default
     - CKAN_DB_USER=ckan_default
     - CKAN_DATASTORE_DB_NAME=datastore_default
@@ -23,37 +14,50 @@ postgres:
     - CKAN_DATASTORE_RW_DB_USER_PASS=pass
     - CKAN_DATASTORE_RO_DB_USER_PASS=pass
   volumes:
-    - /home/core/ckan/compose/postgres:/docker-entrypoint-initdb.d
-    - /home/core/ckan/compose/sbin/busybox:/sbin/busybox
-  volumes_from:
-    - data
+    - {{PWD}}/postgres:/docker-entrypoint-initdb.d
+    - {{PWD}}/sbin/busybox:/sbin/busybox
+{{/RDS}}
 
 solr:
   image: solr:5.4.1
   mem_limit: 314572800
   hostname: solr
   volumes:
+{{#RDS}}
     - /home/core/ckan/compose/solr/ckan:/opt/solr/server/solr/ckan
     - /home/core/ckan/compose/sbin/busybox:/sbin/busybox
+{{/RDS}}
+{{^RDS}}
+    - {{PWD}}/solr/ckan:/opt/solr/server/solr/ckan
+    - {{PWD}}/sbin/busybox:/sbin/busybox
+{{/RDS}}
 
 ckan:
-  image: axetwe/spatial:0.2
+  image: axetwe/spatial:0.1
   mem_limit: 314572800
   hostname: ckan
   ports:
     - "8000:8000"
   links:
+{{^RDS}}
     - postgres:postgres
+{{/RDS}}
     - solr:solr
-  volumes_from:
-    - data
-  volumes:
-    - /home/core/data:/var/lib/ckan
   environment:
+    {{#RDS}}
     - PGUSER={{PGUSER}}
+    {{/RDS}}
     - CKAN_SQLALCHEMY_URL=postgresql://{{CKAN_DB_USER}}:{{CKAN_DB_USER_PASS}}@{{PGHOST}}:{{PGPORT}}/{{CKAN_DB_NAME}}
     - CKAN_DATASTORE_WRITE_URL=postgresql://{{CKAN_DATASTORE_RW_DB_USER}}:{{CKAN_DATASTORE_RW_DB_USER_PASS}}@{{PGHOST}}:{{PGPORT}}/{{CKAN_DATASTORE_DB_NAME}}
     - CKAN_DATASTORE_READ_URL=postgresql://{{CKAN_DATASTORE_RO_DB_USER}}:{{CKAN_DATASTORE_RO_DB_USER_PASS}}@{{PGHOST}}:{{PGPORT}}/{{CKAN_DATASTORE_DB_NAME}}
   volumes:
+{{#RDS}}
     - /home/core/ckan/compose/setup/production.ini:/srv/app/production.ini
     - /home/core/ckan/compose/sbin/busybox:/sbin/busybox
+    - /home/core/data:/var/lib/ckan
+{{/RDS}}
+{{^RDS}}
+    - {{PWD}}/setup/production.ini:/srv/app/production.ini
+    - {{PWD}}/sbin/busybox:/sbin/busybox
+    - {{PWD}}/data:/var/lib/ckan
+{{/RDS}}
