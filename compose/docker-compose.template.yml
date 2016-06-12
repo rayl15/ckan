@@ -5,6 +5,7 @@ postgres:
   hostname: postgres
   restart: "no"
   environment:
+    - POSTGRES_PASSWORD=pass
     - CKAN_DB_NAME=ckan_default
     - CKAN_DB_USER=ckan_default
     - CKAN_DATASTORE_DB_NAME=datastore_default
