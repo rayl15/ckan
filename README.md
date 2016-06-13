@@ -4,6 +4,7 @@ Set variables AWS_ACCESS_KEY_ID, AWS_SECRET_KEY, AWS_DEFAULT_REGION and install 
 
 To use RDS set the following env variables:
 
+- RDS=true
 - PGUSER (e.g. masterusername)
 - PGHOST (e.g. dbinstance.abcdefg.eu-central-1.rds.amazonaws.com)
 - PGPORT (e.g 5432)
