@@ -27,18 +27,18 @@ ps:
 	@ecs-cli ps
 
 template:
-	@rm -f keys/docker-compose.yml
-	@cat compose/docker-compose.template.yml | ./bin/mo > keys/docker-compose.yml
+	@rm -f compose/docker-compose.yml
+	@mo compose/docker-compose.template.yml > compose/docker-compose.yml
 
 up: ecs-compose-up
 
 stop: ecs-compose-stop
 
 ecs-compose-up: template
-	@ecs-cli compose -f keys/docker-compose.yml up
+	@ecs-cli compose -f compose/docker-compose.yml up
 
 ecs-compose-stop: template
-	@ecs-cli compose -f keys/docker-compose.yml stop
+	@ecs-cli compose -f compose/docker-compose.yml stop
 
 policies:
 	@aws iam attach-role-policy --role-name=ecsInstanceRole --policy-arn=arn:aws:iam::aws:policy/AmazonRDSFullAccess
