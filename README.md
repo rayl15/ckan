@@ -1,5 +1,7 @@
 In a nutshell:
 
+Install mo from https://github.com/tests-always-included/mo
+
 Set variables AWS_ACCESS_KEY_ID, AWS_SECRET_KEY, AWS_DEFAULT_REGION and install make, aws-cli, ecs-cli, nodejs. Optionally docker-compose.
 
 To use RDS set the following env variables:
