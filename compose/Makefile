@@ -1,6 +1,8 @@
 RUN_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
 $(eval $(RUN_ARGS):;@:)
 
+PATH:=$(PATH):../bin:../node_modules/.bin
+
 build: prep
 	@docker-compose build
 
