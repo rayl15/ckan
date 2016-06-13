@@ -34,7 +34,7 @@ solr:
 {{/RDS}}
 
 ckan:
-  image: axetwe/spatial:0.1
+  image: axetwe/spatial:0.3
   mem_limit: 314572800
   hostname: ckan
   ports:
