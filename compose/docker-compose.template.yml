@@ -45,12 +45,17 @@ ckan:
 {{/RDS}}
     - solr:solr
   environment:
-    {{#RDS}}
+{{#RDS}}
     - PGUSER={{PGUSER}}
-    {{/RDS}}
     - CKAN_SQLALCHEMY_URL=postgresql://{{CKAN_DB_USER}}:{{CKAN_DB_USER_PASS}}@{{PGHOST}}:{{PGPORT}}/{{CKAN_DB_NAME}}
     - CKAN_DATASTORE_WRITE_URL=postgresql://{{CKAN_DATASTORE_RW_DB_USER}}:{{CKAN_DATASTORE_RW_DB_USER_PASS}}@{{PGHOST}}:{{PGPORT}}/{{CKAN_DATASTORE_DB_NAME}}
     - CKAN_DATASTORE_READ_URL=postgresql://{{CKAN_DATASTORE_RO_DB_USER}}:{{CKAN_DATASTORE_RO_DB_USER_PASS}}@{{PGHOST}}:{{PGPORT}}/{{CKAN_DATASTORE_DB_NAME}}
+{{/RDS}}
+{{^RDS}}
+    - CKAN_SQLALCHEMY_URL=postgresql://{{CKAN_DB_USER}}:{{CKAN_DB_USER_PASS}}@postgres:{{PGPORT}}/{{CKAN_DB_NAME}}
+    - CKAN_DATASTORE_WRITE_URL=postgresql://{{CKAN_DATASTORE_RW_DB_USER}}:{{CKAN_DATASTORE_RW_DB_USER_PASS}}@postgres:5432/{{CKAN_DATASTORE_DB_NAME}}
+    - CKAN_DATASTORE_READ_URL=postgresql://{{CKAN_DATASTORE_RO_DB_USER}}:{{CKAN_DATASTORE_RO_DB_USER_PASS}}@postgres:5432/{{CKAN_DATASTORE_DB_NAME}}
+{{/RDS}}
   volumes:
 {{#RDS}}
     - /home/core/ckan/compose/setup/production.ini:/srv/app/production.ini
