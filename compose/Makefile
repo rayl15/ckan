@@ -13,7 +13,7 @@ up: prep
 prep:
 	@chmod 777 data
 	@rm -rf postgres/*.made.sql
-	@mo docker-compose.template.yml > docker-compose.yml
+	@unset RDS && mo docker-compose.template.yml > docker-compose.yml
 
 stop:
 	@docker-compose stop
