@@ -28,4 +28,4 @@ post:
 	@curl -s -X POST http://$(RUN_ARGS):8000/api/3/action/datastore_create -H "Authorization: $(MY_API_KEY)" -d '{"resource": {"package_id": "$(MY_PACKAGE_ID)"}, "fields": [ {"id": "a"}, {"id": "b"} ], "records": [ { "a": 1, "b": "xyz"}, {"a": 2, "b": "zzz"} ]}' | jq .
 
 getresource:
-	@curl -s -X GET http://$(RUN_ARGS):8000/api/3/action/datastore_search?resource_id=$(MY_RESOURCE_KEY)
+	@curl -s -X GET http://$(RUN_ARGS):8000/api/3/action/datastore_search?resource_id=$(MY_RESOURCE_ID)
