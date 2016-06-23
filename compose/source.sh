@@ -10,3 +10,4 @@ export CKAN_DATASTORE_RO_DB_USER=datastore_default
 export CKAN_DB_USER_PASS=pass
 export CKAN_DATASTORE_RW_DB_USER_PASS=pass
 export CKAN_DATASTORE_RO_DB_USER_PASS=pass
+export PGPORT=5432
