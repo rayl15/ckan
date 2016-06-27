@@ -21,6 +21,9 @@ stop:
 exec:
 	@docker exec -it $(shell docker ps | grep $(RUN_ARGS) | cut -d ' ' -f1)  bash
 
+execsh:
+	@docker exec -it $(shell docker ps | grep $(RUN_ARGS) | cut -d ' ' -f1)  sh
+
 get:
 	@curl -s -X GET http://$(RUN_ARGS):8000/api/3/action/datastore_search?resource_id=_table_metadata | jq .
 

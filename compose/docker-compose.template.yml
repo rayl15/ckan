@@ -19,6 +19,18 @@ postgres:
     - {{PWD}}/sbin/busybox:/sbin/busybox
 {{/RDS}}
 
+redis:
+  image: redis:3.2.1-alpine
+  mem_limit: 39715200
+  hostname: redis
+  volumes:
+{{#RDS}}
+    - /home/core/ckan/compose/sbin/busybox:/sbin/busybox
+{{/RDS}}
+{{^RDS}}
+    - {{PWD}}/sbin/busybox:/sbin/busybox
+{{/RDS}}
+
 solr:
   image: solr:5.4.1
   mem_limit: 314572800
@@ -34,7 +46,7 @@ solr:
 {{/RDS}}
 
 ckan:
-  image: axetwe/spatial:0.3
+  image: axetwe/spatial:0.4
   mem_limit: 314572800
   hostname: ckan
   ports:
@@ -44,6 +56,7 @@ ckan:
     - postgres:postgres
 {{/RDS}}
     - solr:solr
+    - redis:redis
   environment:
 {{#RDS}}
     - PGUSER={{PGUSER}}

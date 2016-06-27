@@ -7,3 +7,7 @@ RUN pip install -e "git+https://github.com/XVTSolutions/ckanext-spatialUI#egg=ck
 RUN find  / -name search.html -exec md5sum {} + | sort
 RUN sed -i '${/^$/d;}' /srv/app/src/ckan/ckan/templates/package/search.html
 RUN sed -i '$i {% snippet "spatial/snippets/spatial_query.html" %}' /srv/app/src/ckan/ckan/templates/package/search.html
+
+#dcat
+RUN pip install -e git+https://github.com/ckan/ckanext-dcat.git#egg=ckanext-dcat
+RUN pip install -r ${APP_DIR}/src/ckanext-dcat/requirements.txt
