@@ -24,6 +24,9 @@ exec:
 execsh:
 	@docker exec -it $(shell docker ps | grep $(RUN_ARGS) | cut -d ' ' -f1)  sh
 
+paster:
+	@docker exec $(shell docker ps | grep spatial | cut -d ' ' -f1) sh -c "cd /srv/app/src/ckan && paster --plugin=ckanext-harvest $(RUN_ARGS) -c /srv/app/production.ini"
+
 get:
 	@curl -s -X GET http://$(RUN_ARGS):8000/api/3/action/datastore_search?resource_id=_table_metadata | jq .
 
