@@ -11,3 +11,7 @@ RUN sed -i '$i {% snippet "spatial/snippets/spatial_query.html" %}' /srv/app/src
 #dcat
 RUN pip install -e git+https://github.com/ckan/ckanext-dcat.git#egg=ckanext-dcat
 RUN pip install -r ${APP_DIR}/src/ckanext-dcat/requirements.txt
+RUN pip install --upgrade pip
+#RUN pip install --upgrade ckan
+ADD update.py /update.py
+RUN python /update.py
