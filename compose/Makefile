@@ -7,7 +7,7 @@ build: prep
 	@docker-compose build
 
 up: prep
-	#@docker-compose rm -f
+	@docker-compose rm -f
 	@docker-compose up --force-recreate
 
 prep:
