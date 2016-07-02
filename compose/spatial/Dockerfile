@@ -15,3 +15,4 @@ RUN pip install --upgrade pip
 #RUN pip install --upgrade ckan
 ADD update.py /update.py
 RUN python /update.py
+RUN pip install --upgrade factory_boy mock
