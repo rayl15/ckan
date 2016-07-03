@@ -19,6 +19,13 @@ postgres:
     - {{PWD}}/sbin/busybox:/sbin/busybox
 {{/RDS}}
 
+datapusher:
+  build: datapusher
+  hostname: datapusher
+{{^RDS}}
+    - {{PWD}}/sbin/busybox:/sbin/busybox
+{{/RDS}}
+
 redis:
   image: redis:3.2.1-alpine
   mem_limit: 39715200
@@ -57,6 +64,7 @@ ckan:
 {{/RDS}}
     - solr:solr
     - redis:redis
+    - datapusher:datapusher
   environment:
 {{#RDS}}
     - PGUSER={{PGUSER}}
