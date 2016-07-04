@@ -1,7 +1,6 @@
 {{^RDS}}
 postgres:
   image: mdillon/postgis:9.5
-  mem_limit: 209715200
   hostname: postgres
   restart: "no"
   environment:
@@ -21,7 +20,9 @@ postgres:
 
 datapusher:
   image: axetwe/datapusher:0.1
-  mem_limit: 50971520
+{{#RDS}}
+  mem_limit: 509715209
+{{/RDS}}
   hostname: datapusher
 {{^RDS}}
     - {{PWD}}/sbin/busybox:/sbin/busybox
@@ -29,7 +30,9 @@ datapusher:
 
 redis:
   image: redis:3.2.1-alpine
+{{#RDS}}
   mem_limit: 39715200
+{{/RDS}}
   hostname: redis
   volumes:
 {{#RDS}}
@@ -41,7 +44,9 @@ redis:
 
 solr:
   image: solr:5.4.1
-  mem_limit: 214572800
+{{#RDS}}
+  mem_limit: 314572800
+{{/RDS}}
   hostname: solr
   volumes:
 {{#RDS}}
@@ -55,7 +60,9 @@ solr:
 
 ckan:
   image: axetwe/spatial:0.5
+{{#RDS}}
   mem_limit: 314572800
+{{/RDS}}
   hostname: ckan
   ports:
     - "8000:8000"
