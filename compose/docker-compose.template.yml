@@ -20,7 +20,8 @@ postgres:
 {{/RDS}}
 
 datapusher:
-  build: datapusher
+  image: axetwe/datapusher:0.1
+  mem_limit: 50971520
   hostname: datapusher
 {{^RDS}}
     - {{PWD}}/sbin/busybox:/sbin/busybox
@@ -40,7 +41,7 @@ redis:
 
 solr:
   image: solr:5.4.1
-  mem_limit: 314572800
+  mem_limit: 214572800
   hostname: solr
   volumes:
 {{#RDS}}
