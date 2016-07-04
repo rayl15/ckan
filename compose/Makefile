@@ -35,3 +35,6 @@ post:
 
 getresource:
 	@curl -s -X GET http://$(RUN_ARGS):8000/api/3/action/datastore_search?resource_id=$(MY_RESOURCE_ID) | jq .
+
+mem:
+	@echo 3 > /proc/sys/vm/drop_caches
