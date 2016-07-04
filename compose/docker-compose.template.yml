@@ -21,7 +21,7 @@ postgres:
 datapusher:
   image: axetwe/datapusher:0.1
 {{#RDS}}
-  mem_limit: 509715209
+  mem_limit: 314572800
 {{/RDS}}
   hostname: datapusher
 {{^RDS}}
