@@ -65,7 +65,8 @@ ckan:
 {{/RDS}}
   hostname: ckan
   ports:
-    - "8000:8000"
+    - "80:8000"
+    - "443:8443"
   links:
 {{^RDS}}
     - postgres:postgres
@@ -74,6 +75,8 @@ ckan:
     - redis:redis
     - datapusher:datapusher
   environment:
+    - CKAN_OAUTH2_CLIENT_ID={{CKAN_OAUTH2_CLIENT_ID}}
+    - CKAN_OAUTH2_CLIENT_SECRET={{CKAN_OAUTH2_CLIENT_SECRET}}
 {{#RDS}}
     - PGUSER={{PGUSER}}
     - CKAN_SQLALCHEMY_URL=postgresql://{{CKAN_DB_USER}}:{{CKAN_DB_USER_PASS}}@{{PGHOST}}:{{PGPORT}}/{{CKAN_DB_NAME}}
@@ -88,11 +91,23 @@ ckan:
   volumes:
 {{#RDS}}
     - /home/core/ckan/compose/setup/production.ini:/srv/app/production.ini
+    - /home/core/ckan/compose/crt:/crt
+    - /home/core/ckan/compose/setup/app.conf:/srv/app/app.conf
+    - /home/core/ckan/compose/setup/app.conf:/etc/supervisor/conf.d/app.conf
     - /home/core/ckan/compose/sbin/busybox:/sbin/busybox
+    - /home/core/ckan/compose/setup/environment.py:/usr/local/lib/python2.7/site-packages/ckan-2.5.2-py2.7.egg/ckan/config/environment.py
+    - /home/core/ckan/compose/setup/environment.py:/srv/app/src/ckan/build/lib/ckan/config/environment.py
+    - /home/core/ckan/compose/setup/environment.py:/srv/app/src/ckan/ckan/config/environment.py
     - /home/core/data:/var/lib/ckan
 {{/RDS}}
 {{^RDS}}
     - {{PWD}}/setup/production.ini:/srv/app/production.ini
+    - {{PWD}}/crt:/crt
+    - {{PWD}}/setup/app.conf:/srv/app/app.conf
+    - {{PWD}}/setup/app.conf:/etc/supervisor/conf.d/app.conf
     - {{PWD}}/sbin/busybox:/sbin/busybox
+    - {{PWD}}/setup/environment.py:/usr/local/lib/python2.7/site-packages/ckan-2.5.2-py2.7.egg/ckan/config/environment.py
+    - {{PWD}}/setup/environment.py:/srv/app/src/ckan/build/lib/ckan/config/environment.py
+    - {{PWD}}/setup/environment.py:/srv/app/src/ckan/ckan/config/environment.py
     - {{PWD}}/data:/var/lib/ckan
 {{/RDS}}

@@ -6,7 +6,7 @@ PATH:=$(PATH):../bin:../node_modules/.bin
 build: prep
 	@docker-compose build
 
-up: prep
+up: build prep
 	@docker-compose rm -f
 	@docker-compose up --force-recreate
 
