@@ -27,7 +27,27 @@ For NFS set the following variable, for example:
 
 - NFSADDRESS=localhost:/data
 
-ecs-cli from the official repo doesn't support "restart: no" yet, custom built one is [here](http://beehub.nl/home/xaduha/public/bin/ecs-cli).
+To use oauth2, get client id and secret by following these steps:
+
+1. Create a new project: https://console.developers.google.com/project
+2. Choose the new project from the top right project dropdown (only if another project is selected)
+3. In the project Dashboard center pane, choose **"Enable and manage APIs"**
+4. In the left Nav pane, choose **"Credentials"**
+5. In the center pane, choose **"OAuth consent screen"** tab. Fill in **"Product name shown to users"** and hit save.
+6. In the center pane, choose **"Credentials"** tab.
+   * Open the **"New credentials"** drop down
+   * Choose **"OAuth client ID"**
+   * Choose **"Web application"**
+   * Authorized JavaScript origins: `https://internal.yourcompany.com`
+   * Authorized redirect URIs is the location of oath2/callback: `https://internal.yourcompany.com/oauth2/callback`
+   * Choose **"Create"**
+
+Copy client id and secret to env variables
+
+- CKAN_OAUTH2_CLIENT_ID
+- CKAN_OAUTH2_CLIENT_SECRET
+
+After starting the server put the IP address in /etc/hosts as internal.yourcompany.com, to access later as https://internal.yourcompany.com
 
     1. npm install --save
     2. make ssh-keygen
